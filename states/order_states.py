@@ -1,4 +1,3 @@
-# states/order_states.py
 from aiogram.dispatcher.filters.state import StatesGroup, State
 
 class OrderStates(StatesGroup):
