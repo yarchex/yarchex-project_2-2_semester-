@@ -1,1 +1,33 @@
+{
+  "start": "Добро пожаловать!",
+  "help": "Помощь по командам",
+  "order_link": "Отправьте ссылку на товар"
+}
 
+# locales/en.json
+{
+  "start": "Welcome!",
+  "help": "Command help",
+  "order_link": "Send product link"
+}
+
+# utils/i18n.py
+import json
+from pathlib import Path
+
+class Translator:
+    def __init__(self):
+        self.locales = {}
+        self.load_locales()
+
+    def load_locales(self):
+        locales_dir = Path("locales")
+        for file in locales_dir.glob("*.json"):
+            lang = file.stem
+            with open(file, "r", encoding="utf-8") as f:
+                self.locales[lang] = json.load(f)
+
+    def get(self, key: str, lang: str = "ru"):
+        return self.locales.get(lang, {}).get(key, key)
+
+translator = Translator()
